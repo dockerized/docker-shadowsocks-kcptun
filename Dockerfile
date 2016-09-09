@@ -44,4 +44,4 @@ EXPOSE 10010/udp
 EXPOSE 62266/tcp
 EXPOSE 62266/udp
 
-CMD ["supervisord"]
+CMD ["supervisord", "-n"]
