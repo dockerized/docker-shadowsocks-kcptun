@@ -1,2 +1,2 @@
-# docker-shadowsocks-kcptun
-Shadowsocks Over KCP 
+# docker-shadowsocks-libev
+Shadowsocks libev

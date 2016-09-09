@@ -1,0 +1,10 @@
+version: '2'
+services:
+  shadowsocks:
+    image: xiocode/shadowsocks-kcptun
+    ports:
+      - "10010:10010/tcp"
+      - "10010:10010/udp"
+      - "62266:62266/tcp"
+      - "62266:62266/udp"
+    restart: always
