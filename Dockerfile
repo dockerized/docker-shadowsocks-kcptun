@@ -19,9 +19,6 @@ RUN set -ex \
 
 ADD supervisord.conf /etc/supervisord.conf
 
-RUN set -xe \
-    && curl -sSL ${KCPTUN_URL} | tar xz -C /usr/local/bin
-
 RUN set -ex \
     && apk --no-cache --update add $SS_DEP \
     && git clone $SS_URL \
@@ -30,10 +27,16 @@ RUN set -ex \
     && ./configure \
     && make install \
     && cd .. \
-    && rm -rf $SS_DIR \
+    && rm -rf $SS_DIR
+
+RUN set -ex \
+    && curl -sSL ${KCPTUN_URL} | tar xz -C /usr/local/bin
+
+RUN set -ex \
     && apk del --purge $SS_DEP \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
+
 
 EXPOSE 10010/tcp
 EXPOSE 10010/udp
