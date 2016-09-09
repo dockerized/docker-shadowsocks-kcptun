@@ -37,11 +37,13 @@ RUN set -ex \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 
+ENV SS_PORT 7777
+ENV KCP_PORT 8888
 
-EXPOSE 7777/tcp
-EXPOSE 7777/udp
+EXPOSE $SS_PORT/tcp
+EXPOSE $SS_PORT/udp
 
-EXPOSE 8888/tcp
-EXPOSE 8888/udp
+EXPOSE $KCP_PORT/tcp
+EXPOSE $KCP_PORT/udp
 
 CMD ["supervisord", "-n"]
