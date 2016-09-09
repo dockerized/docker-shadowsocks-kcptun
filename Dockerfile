@@ -20,7 +20,7 @@ RUN set -ex \
 ADD supervisord.conf /etc/supervisord.conf
 
 RUN set -xe \
-    && curl -sSL ${KCPTUN_URL} | tar xz -C /usr/local/bin
+    && curl -sSL ${KCPTUN_URL} | tar -xvf -C /usr/local/bin
 
 RUN set -ex \
     && apk --no-cache --update add $SS_DEP \
