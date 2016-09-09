@@ -38,10 +38,10 @@ RUN set -ex \
     && rm -rf /tmp/*
 
 
-EXPOSE 10010/tcp
-EXPOSE 10010/udp
+EXPOSE 7777/tcp
+EXPOSE 7777/udp
 
-EXPOSE 62266/tcp
-EXPOSE 62266/udp
+EXPOSE 8888/tcp
+EXPOSE 8888/udp
 
 CMD ["supervisord", "-n"]
