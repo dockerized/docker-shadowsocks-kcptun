@@ -8,6 +8,7 @@ MAINTAINER Tony.Shao <xiocode@gmail.com>
 ENV SS_VERSION v2.5.2
 ENV SS_URL https://github.com/shadowsocks/shadowsocks-libev.git
 ENV SS_DIR shadowsocks-libev
+ENV SS_DEP pcre
 ENV SS_DEP git autoconf build-base curl libtool linux-headers openssl-dev asciidoc xmlto pcre-dev
 
 ENV KCPTUN_VERSION 20160912
@@ -20,7 +21,7 @@ RUN set -ex \
 ADD supervisord.conf /etc/supervisord.conf
 
 RUN set -ex \
-    && apk --no-cache --update add $SS_DEP \
+    && apk --no-cache --update add $SS_DEP $SS_DEP \
     && git clone $SS_URL \
     && cd $SS_DIR \
     && git checkout tags/$SS_VERSION \
