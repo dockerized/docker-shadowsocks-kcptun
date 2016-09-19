@@ -34,7 +34,7 @@ RUN set -ex \
     && curl -sSL ${KCPTUN_URL} | tar xz -C /usr/local/bin
 
 RUN set -ex \
-    && apk del --purge $SS_DEP \
+    && apk del --purge $SS_BUILD_DEP \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 
