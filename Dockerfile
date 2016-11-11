@@ -5,13 +5,13 @@
 FROM alpine:edge
 MAINTAINER Tony.Shao <xiocode@gmail.com>
 
-ENV SS_VERSION v2.5.5
+ENV SS_VERSION v2.5.6
 ENV SS_URL https://github.com/shadowsocks/shadowsocks-libev.git
 ENV SS_DIR shadowsocks-libev
 ENV SS_DEP pcre
 ENV SS_BUILD_DEP git autoconf build-base curl libtool linux-headers openssl-dev asciidoc xmlto pcre-dev
 
-ENV KCPTUN_VERSION 20161025
+ENV KCPTUN_VERSION 20161110
 ENV KCPTUN_FILE kcptun-linux-amd64-${KCPTUN_VERSION}.tar.gz
 ENV KCPTUN_URL https://github.com/xtaci/kcptun/releases/download/v${KCPTUN_VERSION}/${KCPTUN_FILE}
 
