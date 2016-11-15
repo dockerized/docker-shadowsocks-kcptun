@@ -13,6 +13,7 @@ RUN \
     && cd ~ \
     && apk del .build-deps \
     && apk add --no-cache supervisor
+    -ADD supervisord.conf /etc/supervisord.conf
 
 ENV SS_PORT 7777
 ENV SS_PASSWORD 1234567890
