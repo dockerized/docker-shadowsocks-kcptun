@@ -1,42 +1,18 @@
-#
-# Dockerfile for shadowsocks-libev
-#
+# Shadowsocks Server with KCPTUN support Dockerfile
 
-FROM alpine:edge
-MAINTAINER Tony.Shao <xiocode@gmail.com>
+FROM jonsun30/shadowsocks-docker
 
-ENV SS_VERSION v2.5.6
-ENV SS_URL https://github.com/shadowsocks/shadowsocks-libev.git
-ENV SS_DIR shadowsocks-libev
-ENV SS_DEP pcre
-ENV SS_BUILD_DEP git autoconf build-base curl libtool linux-headers openssl-dev asciidoc xmlto pcre-dev
+ENV KCP_VER 20161111
 
-ENV KCPTUN_VERSION 20161111
-ENV KCPTUN_FILE kcptun-linux-amd64-${KCPTUN_VERSION}.tar.gz
-ENV KCPTUN_URL https://github.com/xtaci/kcptun/releases/download/v${KCPTUN_VERSION}/${KCPTUN_FILE}
-
-RUN set -ex \
-    && apk --no-cache --update add supervisor
-
-ADD supervisord.conf /etc/supervisord.conf
-
-RUN set -ex \
-    && apk --no-cache --update add $SS_DEP $SS_BUILD_DEP \
-    && git clone $SS_URL \
-    && cd $SS_DIR \
-    && git checkout tags/$SS_VERSION \
-    && ./configure \
-    && make install \
-    && cd .. \
-    && rm -rf $SS_DIR
-
-RUN set -ex \
-    && curl -sSL ${KCPTUN_URL} | tar xz -C /usr/local/bin
-
-RUN set -ex \
-    && apk del --purge $SS_BUILD_DEP \
-    && rm -rf /var/cache/apk/* \
-    && rm -rf /tmp/*
+RUN \
+    apk add --no-cache --virtual .build-deps curl \
+    && mkdir -p /opt/kcptun \
+    && cd /opt/kcptun \
+    && curl -fSL https://github.com/xtaci/kcptun/releases/download/v$KCP_VER/kcptun-linux-amd64-$KCP_VER.tar.gz | tar xz \
+    && rm client_linux_amd64 \
+    && cd ~ \
+    && apk del .build-deps \
+    && apk add --no-cache supervisor
 
 ENV SS_PORT 7777
 ENV SS_PASSWORD 1234567890
